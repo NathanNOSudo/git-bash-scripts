@@ -3,12 +3,14 @@
 Bash scripts can make your life easier when you're working with Git repositories. Your probably thinking there's no need; everything I need to do can be done with Git commands...and your correct.
 The fact of the matter is it's incredibly more convienent to use the scripts than trying to figure out the appropriate Git command to do what I want. Scripts make life easier; work smarter, not harder.
 
-- **[gitlog](gitlog)**
-- **[gitlog.id](gitlog.id)**
-- **[gitlog.id2](gitlog.id2)**
-- **[coming-soon](coming-soon)**
-- **[coming-soon](coming-soon)**
-- **[coming-soon](coming-soon)**
+## Scripts:
+
+* [gitlog](#gitlog)
+* [gitlog.id](#gitlog.id)
+* [gitlog.id2](#gitlog.id2)
+* [gitlog.grep](#gitlog.grep)
+* [coming-soon](#coming-soon)
+* [coming-soon](#coming-soon)
 
 
 
@@ -48,9 +50,30 @@ $ for i in `gitlog.id2 prototype8` ; do git cherry-pick $i ;done
 ```
 
 <br></br>
-**<h2 style="text-align: center;">coming-soon</h2>**
-<p>
+**<h2 style="text-align: center;">gitlog.grep</h2>**
+<p>gitlog.grep greps for a string within that collection of patches. For example, if I find a bug and want to fix the patch that has a reference to function inode_go_sync, I can simply do:
 
+```sh
+$ gitlog.grep inode_go_sync
+-----------------------[ prototype19 - 50 patches ]-----------------------
+(snip)
+11 340d27a33895 Nathan Nosudo     gfs2: drain the ail2 list after io errors
+10 9b3c4e6efb10 Enkeli Gjylameti     gfs2: clean up iopen glock mess in gfs2_create_inode
+ 9 d2e8c22be39b Stelion Kontos     gfs2: Do proper error checking for go_sync family of glops
+152:-static void inode_go_sync(struct gfs2_glock *gl)
+153:+static int inode_go_sync(struct gfs2_glock *gl)
+163:@@ -296,6 +302,7 @@ static void inode_go_sync(struct gfs2_glock *gl)
+ 8 9563e31f8bfd Nathan Nosudo gfs2: use page_offset in gfs2_page_mkwrite
+ 7 ebac7a38036c Nathan Nosudo gfs2: don't use buffer_heads in gfs2_allocate_page_backing
+ 6 f703a3c27874 Vitali Makaveli gfs2: Improve mmap write vs. punch_hole consistency
+ 5 a3e86d2ef30e Andreas Ellis gfs2: Multi-block allocations in gfs2_page_mkwrite
+ 4 da3c604755b0 Andreas Ellis gfs2: Fix end-of-file handling in gfs2_page_mkwrite
+ 3 4525c2f5b46f Enkeli Gjylameti     Vitali Makaveli's slab instrumentation
+ 2 a06a5b7dea02 Nathan Nosudo     GFS2: Add go_get_holdtime to gl_ops
+ ^ 8ba93c796d5c Nathan Nosudo     gfs2: introduce new function remaining_hold_time and use it in dq
+ H e8b5ff851bb9 Nathan Nosudo     gfs2: Allow rgrps to have a minimum hold time
+```
+So, now we know that patch HEAD~9 is the one that needs fixing. I use git rebase -i HEAD~10 to edit patch 9, git commit -a --amend, then git rebase --continue to make the necessary adjustments.
 <br></br>
 **<h2 style="text-align: center;">coming-soon</h2>**
 <p>
