@@ -11,6 +11,8 @@ The fact of the matter is it's incredibly more convienent to use the scripts tha
 * [gitlog.grep](#gitlog.grep)
 * [coming-soon](#coming-soon)
 * [coming-soon](#coming-soon)
+* [fetchall](#fetchall)
+* [updateall](#updateall)
 
 
 
@@ -73,7 +75,20 @@ $ gitlog.grep inode_go_sync
  ^ 8ba93c796d5c Nathan Nosudo     gfs2: introduce new function remaining_hold_time and use it in dq
  H e8b5ff851bb9 Nathan Nosudo     gfs2: Allow rgrps to have a minimum hold time
 ```
-So, now we know that patch HEAD~9 is the one that needs fixing. I use git rebase -i HEAD~10 to edit patch 9, git commit -a --amend, then git rebase --continue to make the necessary adjustments.
+So, now we know that patch HEAD~9 is the one that needs fixing. I use: 
+```sh
+git rebase -i HEAD~10
+``` 
+to edit patch 9,
+```sh
+ git commit -a --amend, 
+```
+then:
+```sh 
+ git rebase --continue  
+```
+to make the necessary adjustments.
+
 <br></br>
 **<h2 style="text-align: center;">coming-soon</h2>**
 <p>
@@ -81,3 +96,13 @@ So, now we know that patch HEAD~9 is the one that needs fixing. I use git rebase
 <br></br>
 **<h2 style="text-align: center;">coming-soon</h2>**
 <p>
+
+<br></br>
+**<h2 style="text-align: center;">fetchall</h2>**
+<p>Process a directory of git repos, fetching all remotes and updating
+ the default local branch.
+
+
+<br></br>
+**<h2 style="text-align: center;">updateall</h2>**
+<p>Process a directory of mirrored git repos, updating from the remote.
